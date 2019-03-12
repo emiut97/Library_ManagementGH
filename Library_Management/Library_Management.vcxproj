@@ -121,10 +121,12 @@
     <ClInclude Include="classes.h" />
     <ClInclude Include="console_functions_LEGACY.h" />
     <ClInclude Include="design_LEGACY.h" />
+    <ClInclude Include="functions.h" />
     <ClInclude Include="standard_includes.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="classes.cpp" />
+    <ClCompile Include="functions.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -19,7 +19,7 @@ int main()
 	cout << endl;
 	print_vasat("1) Erfan Mazaheri 9734923", "def", "red", columns);
 	cout << endl;
-	print_vasat("2) Ali Seraj (TODO)", "def", "red", columns); //TODO
+	print_vasat("2) Ali Seraj 9728343", "def", "red", columns);
 	cout << endl << endl;
 
 	GOT_theme(); //TODO
