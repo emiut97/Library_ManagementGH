@@ -1,6 +1,7 @@
 #include "standard_includes.h"
 #include "console_functions_LEGACY.h"
 #include "design_LEGACY.h"
+#include "classes.h"
 
 int main()
 {
@@ -21,14 +22,16 @@ int main()
 	cout << endl;
 	print_vasat("2) Ali Seraj 9728343", "def", "red", columns);
 	cout << endl << endl;
-
-	GOT_theme(); //TODO
+	delay(6000);
+	//GOT_theme(); //TODO
 
 
 	//		<<<ESSENTIALS>>>
 
 	///^Controling exits
 	SetConsoleCtrlHandler(CtrlHandler, TRUE);
+
+	library lib("mylib001", "1010101010");
 
 
 

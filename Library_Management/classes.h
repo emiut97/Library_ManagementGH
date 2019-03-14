@@ -22,10 +22,10 @@ class library //TODO
 public:
 	void set_name(string new_name);
 	void set_name(const char* new_name);
-	string get_name();
+	string get_name () const;
 
 	void set_address(char new_address[]);
-	char* get_address();
+	const char* get_address() const;
 
 public:
 	library(string name, char address[]);//file ham besazim inja
@@ -43,7 +43,7 @@ class book
 	bool deleted = false;
 
 public:
-	void set_ISBN(char new_ISBN[]);
+	void set_ISBN(const char* new_ISBN);    //(char new_ISBN[])
 	char* get_ISBN();
 
 	void set_name(char new_name[]);
