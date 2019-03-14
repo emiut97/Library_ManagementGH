@@ -1,7 +1,7 @@
 #pragma once
 
 //Haminja okay e baraye enum :|
-enum genres {
+typedef enum genres {
 	GNOTSET,
 	Fantasy,
 	Westerns,
@@ -59,6 +59,8 @@ public:
 	string get_author() const;
 
 	void set_genre(genres new_genre);
+	bool set_genre(string new_genre);
+	bool set_genre(int new_genre);
 	genres get_genre() const;
 
 	void set_loaned(bool new_loan_state);
@@ -67,11 +69,9 @@ public:
 	void set_deleted(bool new_deletion_state);
 	bool get_deleted() const;
 
-public: //TODO
+public:
 	book();
 	book(char vISBN[],  char vname[], string vauthor, genres vgenre, bool vloaned, bool vdeleted);
 	book(ifstream& in);
 
-
-	
 };

@@ -5,6 +5,10 @@
 
 #include "classes.h"
 
+
+
+/// LIBRARY>>>
+
 void library::set_name(string new_name)
 {
 	name = new_name;
@@ -20,6 +24,7 @@ string library::get_name () const
 	return name;
 }
 
+
 void library::set_address(char new_address[])
 {
 	for (int i = 0; i < 10; ++i)
@@ -32,7 +37,6 @@ const char* library::get_address() const //possible bug
 {
 	return address;
 }
-
 
 
 void library::set_deleted(bool new_deletion_state)
@@ -63,6 +67,7 @@ library::library(std::ifstream& in)
 }
 
 
+
 ///   BOOK>>>
 
 void book::set_ISBN(const char* new_ISBN)    //(char new_ISBN[])
@@ -80,6 +85,7 @@ const char* book::get_ISBN () const
 	return ISBN;
 }
 
+
 void book::set_name(char new_name[])
 {
 	//TODO ali: agar kamtar az 18 ta bood chi?
@@ -94,6 +100,7 @@ const char* book::get_name() const
 	//TODO ali: check if it actually returns the whole daastaan
 	return name;
 }
+
 
 void book::set_author(string new_author)
 {
@@ -110,15 +117,96 @@ string book::get_author() const
 	return author;
 }
 
+
 void book::set_genre(genres new_genre)
 {
 	genre = new_genre;
+}
+
+bool book::set_genre(string new_genre)
+{
+	if (new_genre == "Fantasy")
+	{
+		genre = Fantasy;
+		return true;
+	}
+	if (new_genre == "Westerns")
+	{
+		genre = Westerns;
+		return true;
+	}
+	if (new_genre == "Romance")
+	{
+		genre = Romance;
+		return true;
+	}
+	if (new_genre == "Thriller")
+	{
+		genre = Thriller;
+		return true;
+	}
+	if (new_genre == "Mystery")
+	{
+		genre = Mystery;
+		return true;
+	}
+	if (new_genre == "Detective_Story")
+	{
+		genre = Detective_Story;
+		return true;
+	}
+	if (new_genre == "Biography")
+	{
+		genre = Biography;
+		return true;
+	}
+	if (new_genre == "Musical")
+	{
+		genre = Musical;
+		return true;
+	}
+	return false;
+}
+
+bool book::set_genre(int new_genre)
+{
+	switch (new_genre)
+	{
+	case 1:
+		genre = Fantasy;
+		break;
+	case 2:
+		genre = Westerns;
+		break;
+	case 3:
+		genre = Romance;
+		break;
+	case 4:
+		genre = Thriller;
+		break;
+	case 5:
+		genre = Mystery;
+		break;
+	case 6:
+		genre = Detective_Story;
+		break;
+	case 7:
+		genre = Biography;
+		break;
+	case 8:
+		genre = Musical;
+		break;
+	default:
+		return false;
+	}
+	return true;
 }
 
 genres book::get_genre() const
 {
 	return genre;
 }
+
 
 void book::set_loaned(bool new_loan_state)
 {
@@ -130,6 +218,7 @@ bool book::get_loaned() const
 	return loaned;
 }
 
+
 void book::set_deleted(bool new_deletion_state)
 {
 	deleted = new_deletion_state;
@@ -139,6 +228,7 @@ bool book::get_deleted() const
 {
 	return deleted;
 }
+
 
 book::book()
 {
@@ -159,5 +249,5 @@ book::book(ifstream& in)
 	//possible bug: different variable types... (does it auto cast?)
 	string s;
 	in >> ISBN >> name >> author >> s >> loaned >> deleted;
-	//genre = s; //TODO ali: chetor cast beshe?
+	set_genre(s); //possible bug ali: genre chetor save shode tooye file? cast az string be chi beshe s, ke bad az khoondan az file, dorost set beshe.
 }
