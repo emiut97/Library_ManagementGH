@@ -17,9 +17,11 @@ void disable_ctrl_c();
 void enable_ctrl_c();
 
 void print_vasat(string s, string back, string text, int columns);
+int console_columns_count();
 
 void delay(unsigned int mss);
 
+void leaving_in(unsigned int seconds, string back_color, string text_color);
 
 //////////////////////////////PROPER EXIT ro bayad kaamel benevisam. akharin line
 
@@ -210,9 +212,34 @@ void GOT_theme()
 }
 
 
+int console_columns_count()
+{
+	CONSOLE_SCREEN_BUFFER_INFO csbi;
+	GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
+	return csbi.srWindow.Right - csbi.srWindow.Left + 1;
+}
+
 
 void delay(unsigned int mss)
 {
 	clock_t goal = mss + clock();
 	while (goal > clock());
+}
+
+void leaving_in(unsigned seconds, string back_color, string text_color)
+{
+	string s = "Leaving in " + to_string(seconds) + " seconds";
+	print_vasat(s, back_color, text_color, console_columns_count());
+	cout << endl;
+
+	//first second (be ellate nahveye implementation e print_vasat function)
+	print_vasat(".", back_color, text_color, console_columns_count()-(seconds/2));
+	delay(990);
+
+	for (unsigned int i = 0; i < seconds-1; i++)
+	{
+		print_in_color(".", back_color, text_color);
+		delay(990);
+	}
+
 }

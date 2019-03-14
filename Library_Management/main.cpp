@@ -2,6 +2,7 @@
 #include "console_functions_LEGACY.h"
 #include "design_LEGACY.h"
 #include "classes.h"
+#include "functions.h"
 
 int main()
 {
@@ -31,7 +32,7 @@ int main()
 	///^Controling exits
 	SetConsoleCtrlHandler(CtrlHandler, TRUE);
 
-	library lib("mylib001", "1010101010");
+	//library lib("mylib001", "1010101010");
 
 
 
@@ -42,10 +43,11 @@ int main()
 	while (option != 99)
 	{
 
-		if (option == 1)
+		if (option == 1) //DONE
 		{
 			//Create a library
 			cls();
+			create_a_library();
 		}
 
 		if (option == 2)

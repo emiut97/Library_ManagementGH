@@ -2,6 +2,7 @@
 
 //Haminja okay e baraye enum :|
 enum genres {
+	GNOTSET,
 	Fantasy,
 	Westerns,
 	Romance,
@@ -27,8 +28,12 @@ public:
 	void set_address(char new_address[]);
 	const char* get_address() const;
 
+	void set_deleted(bool new_deletion_state);
+	bool get_deleted() const;
+
 public:
-	library(string name, char address[]);//file ham besazim inja
+	library();
+	library(string name, char address[], bool deletion_state);
 	library(ifstream& in);
 
 };
@@ -38,32 +43,34 @@ class book
 	char ISBN[10] = {};
 	char name[18] = {};
 	string author = "~";
-	genres genre;
+	genres genre = GNOTSET;
 	bool loaned = false;
 	bool deleted = false;
 
 public:
 	void set_ISBN(const char* new_ISBN);    //(char new_ISBN[])
-	char* get_ISBN();
+	const char* get_ISBN() const;
 
 	void set_name(char new_name[]);
-	char* get_name();
+	const char* get_name() const;
 
 	void set_author(string new_author);
 	void set_author(const char* new_author);
-	string get_author();
+	string get_author() const;
 
 	void set_genre(genres new_genre);
-	genres get_genre();
+	genres get_genre() const;
 
 	void set_loaned(bool new_loan_state);
-	bool get_loaned();
+	bool get_loaned() const;
 
-	void set_deleted(bool new_delete_state);
-	bool get_deleted();
+	void set_deleted(bool new_deletion_state);
+	bool get_deleted() const;
 
-public:
-	book(ifstream& in);//TODO
+public: //TODO
+	book();
+	book(char vISBN[],  char vname[], string vauthor, genres vgenre, bool vloaned, bool vdeleted);
+	book(ifstream& in);
 
 
 	
