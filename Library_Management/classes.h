@@ -23,7 +23,7 @@ class library //TODO
 public:
 	void set_name(string new_name);
 	void set_name(const char* new_name);
-	string get_name () const;
+	string get_name() const;
 
 	void set_address(char new_address[]);
 	const char* get_address() const;
@@ -40,9 +40,9 @@ public:
 
 class book
 {
-	char ISBN[11] = { 'z', 'z', 'z', 'z', 'z', 'z', 'z', 'z', 'z', 'z', 'z'};
-	char name[19] = { '~' ,  '~' ,  '~' ,  '~' ,  '~' ,  '~' ,  '~' ,  '~' ,  '~' , 
-					'~' ,  '~' ,  '~' ,  '~' ,  '~' ,  '~' ,  '~' ,  '~' ,  '~' ,  '~'};
+	char ISBN[11] = { 'z', 'z', 'z', 'z', 'z', 'z', 'z', 'z', 'z', 'z', 'z' };
+	char name[19] = { '~' ,  '~' ,  '~' ,  '~' ,  '~' ,  '~' ,  '~' ,  '~' ,  '~' ,
+		'~' ,  '~' ,  '~' ,  '~' ,  '~' ,  '~' ,  '~' ,  '~' ,  '~' ,  '~' };
 	string author = "~";
 	genres genre = GNOTSET;
 	bool loaned = false;
@@ -50,9 +50,11 @@ class book
 
 public:
 	void set_ISBN(const char* new_ISBN);    //(char new_ISBN[])
+	void set_ISBN(string new_ISBN);
 	const char* get_ISBN() const;
 
 	void set_name(char new_name[]);
+	void set_name(string new_name);
 	const char* get_name() const;
 
 	void set_author(string new_author);
@@ -63,8 +65,10 @@ public:
 	bool set_genre(string new_genre);
 	bool set_genre(int new_genre);
 	genres get_genre() const;
+	int get_genre_int() const;
 
 	void set_loaned(bool new_loan_state);
+	//void set_loaned(string new_loan_state);
 	bool get_loaned() const;
 
 	void set_deleted(bool new_deletion_state);
@@ -72,7 +76,14 @@ public:
 
 public:
 	book();
-	book(char vISBN[],  char vname[], string vauthor, genres vgenre, bool vloaned, bool vdeleted);
+	book(char vISBN[], char vname[], string vauthor, genres vgenre, bool vloaned, bool vdeleted);
 	book(ifstream& in);
 
+};
+
+
+struct bookchain
+{
+	book data;
+	bookchain* next = nullptr;
 };

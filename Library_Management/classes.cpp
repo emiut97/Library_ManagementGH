@@ -19,7 +19,7 @@ void library::set_name(const char* new_name)
 	name = new_name;
 }
 
-string library::get_name () const
+string library::get_name() const
 {
 	return name;
 }
@@ -73,13 +73,21 @@ library::library(std::ifstream& in)
 void book::set_ISBN(const char* new_ISBN)    //(char new_ISBN[])
 {
 	//TODO ali: agar kamtar az 10 ta bood chi?
-	for (int i = 0; i < 10 && new_ISBN[i]!='z' && new_ISBN[i]!='\0' ; ++i)
+	for (int i = 0; i < 10 && new_ISBN[i] != 'z' && new_ISBN[i] != '\0'; ++i)
 	{
 		ISBN[i] = new_ISBN[i];
 	}
 }
 
-const char* book::get_ISBN () const
+void book::set_ISBN(string new_ISBN)
+{
+	for (int i = 0; i < 10 && new_ISBN[i] != 'z' && new_ISBN[i] != '\0'; ++i) //possible bug: string as an array of chars
+	{
+		ISBN[i] = new_ISBN[i];
+	}
+}
+
+const char* book::get_ISBN() const
 {
 	//TODO ali: check if it actually returns the whole daastaan
 	return ISBN;
@@ -90,6 +98,14 @@ void book::set_name(char new_name[])
 {
 	//TODO ali: agar kamtar az 18 ta bood chi?
 	for (int i = 0; i < 18 && new_name[i] != '~' && new_name[i] != '\0'; ++i)
+	{
+		name[i] = new_name[i];
+	}
+}
+
+void book::set_name(string new_name)
+{
+	for (int i = 0; i < 18 && new_name[i] != '~' && new_name[i] != '\0'; ++i)//possible bug: string as an array of chars
 	{
 		name[i] = new_name[i];
 	}
@@ -172,32 +188,32 @@ bool book::set_genre(int new_genre)
 {
 	switch (new_genre)
 	{
-	case 1:
-		genre = Fantasy;
-		break;
-	case 2:
-		genre = Westerns;
-		break;
-	case 3:
-		genre = Romance;
-		break;
-	case 4:
-		genre = Thriller;
-		break;
-	case 5:
-		genre = Mystery;
-		break;
-	case 6:
-		genre = Detective_Story;
-		break;
-	case 7:
-		genre = Biography;
-		break;
-	case 8:
-		genre = Musical;
-		break;
-	default:
-		return false;
+		case 1:
+			genre = Fantasy;
+			break;
+		case 2:
+			genre = Westerns;
+			break;
+		case 3:
+			genre = Romance;
+			break;
+		case 4:
+			genre = Thriller;
+			break;
+		case 5:
+			genre = Mystery;
+			break;
+		case 6:
+			genre = Detective_Story;
+			break;
+		case 7:
+			genre = Biography;
+			break;
+		case 8:
+			genre = Musical;
+			break;
+		default:
+			return false;
 	}
 	return true;
 }
@@ -207,11 +223,37 @@ genres book::get_genre() const
 	return genre;
 }
 
+int book::get_genre_int() const
+{
+	switch (genre)
+	{
+		case Fantasy:
+			return 1;
+		case Westerns:
+			return 2;
+		case Romance:
+			return 3;
+		case Thriller:
+			return 4;
+		case Mystery:
+			return 5;
+		case Detective_Story:
+			return 6;
+		case Biography:
+			return 7;
+		case Musical:
+			return 8;
+		default:
+			return 0;
+	}
+}
+
 
 void book::set_loaned(bool new_loan_state)
 {
 	loaned = new_loan_state;
 }
+
 
 bool book::get_loaned() const
 {

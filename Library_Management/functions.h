@@ -1,4 +1,5 @@
 #pragma once
+#include <locale>
 
 ///MAIN FUNCTIONS
 
@@ -35,3 +36,9 @@ void print_book_info();
 ///OTHER FUNCTIONS
 
 void assign_book_to_library(book thebook, library thelibrary);
+
+void addtochain(book b, bookchain *&first, bookchain *&last);
+
+void freethewholechain(bookchain *&first, bookchain *&last);
+
+bookchain* nth_bookchain(int n, bookchain *&first, bookchain *&last);
