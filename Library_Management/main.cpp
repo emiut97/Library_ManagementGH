@@ -50,7 +50,7 @@ int main()
 			create_a_library();
 		}
 
-		if (option == 2) //TODO
+		if (option == 2) //DONE
 		{
 			//Add a book to a library
 			cls();
@@ -64,7 +64,7 @@ int main()
 			create_a_book();
 		}
 
-		if (option == 4) //TODO
+		if (option == 4) //DONE
 		{
 			//Loan/Return a book
 			cls();

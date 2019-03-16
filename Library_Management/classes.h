@@ -40,8 +40,9 @@ public:
 
 class book
 {
-	char ISBN[10] = {};
-	char name[18] = {};
+	char ISBN[11] = { 'z', 'z', 'z', 'z', 'z', 'z', 'z', 'z', 'z', 'z', 'z'};
+	char name[19] = { '~' ,  '~' ,  '~' ,  '~' ,  '~' ,  '~' ,  '~' ,  '~' ,  '~' , 
+					'~' ,  '~' ,  '~' ,  '~' ,  '~' ,  '~' ,  '~' ,  '~' ,  '~' ,  '~'};
 	string author = "~";
 	genres genre = GNOTSET;
 	bool loaned = false;

@@ -73,7 +73,7 @@ library::library(std::ifstream& in)
 void book::set_ISBN(const char* new_ISBN)    //(char new_ISBN[])
 {
 	//TODO ali: agar kamtar az 10 ta bood chi?
-	for (int i = 0; i < 10; ++i)
+	for (int i = 0; i < 10 && new_ISBN[i]!='z' && new_ISBN[i]!='\0' ; ++i)
 	{
 		ISBN[i] = new_ISBN[i];
 	}
@@ -89,7 +89,7 @@ const char* book::get_ISBN () const
 void book::set_name(char new_name[])
 {
 	//TODO ali: agar kamtar az 18 ta bood chi?
-	for (int i = 0; i < 18; ++i)
+	for (int i = 0; i < 18 && new_name[i] != '~' && new_name[i] != '\0'; ++i)
 	{
 		name[i] = new_name[i];
 	}

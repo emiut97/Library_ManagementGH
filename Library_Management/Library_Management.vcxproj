@@ -126,6 +126,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="classes.cpp" />
+    <ClCompile Include="console_functions_LEGACY.cpp" />
+    <ClCompile Include="design_LEGACY.cpp" />
     <ClCompile Include="functions.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>

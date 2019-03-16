@@ -43,7 +43,117 @@ void create_a_library()
 
 void add_a_book_to_a_library()
 {
+	//INITS
+	library  vlib;
+	vlib.set_name = "NOTFOUND";
+
+	book vbook;
+	vbook.set_author("NOTFOUND");
+
 	//TODO ali: use assign_book_to_library() ...
+	
+	cls();
+	print_vasat("ADD A BOOK TO A LIBRARY!", "yellow", "red", console_columns_count());
+	cout << endl << endl << endl;
+
+	char vaddress[10];
+	print_in_color("> Enter the ADDRESS of the library (10 Characters): ", "def", "yellow");
+	cin >> vaddress;
+
+	ifstream inlib("./text_folder/libraries.txt");
+	
+	while (inlib.good())
+	{
+		library temp(inlib);
+		bool same = true;
+		for (int i = 0; i < 10; ++i)
+		{
+			if (temp.get_address()[i] != vaddress[i])
+			{
+				same = false;
+			}
+		}
+		if (same)
+		{
+			vlib = temp;
+		}
+	}
+	inlib.close();
+	if (vlib.get_name()=="NOTFOUND")
+	{
+		cout << endl;
+		print_line_in_color(console_columns_count(), "red");
+		cout << endl;
+		print_in_color("LIBRARY NOT FOUND!","def","red");
+		cout << endl;
+		leaving_in(4, "def", "red");
+		return; //FUNCTION ENDS HERE
+	}
+
+	bool tryagain = true;
+	while (tryagain)
+	{
+	cout << endl;
+	char vISBN[11] = { 'z', 'z', 'z', 'z', 'z', 'z', 'z', 'z', 'z', 'z', 'z' };
+	char vname[19]= { '~' ,  '~' ,  '~' ,  '~' ,  '~' ,  '~' ,  '~' ,  '~' ,  '~' ,
+				'~' ,  '~' ,  '~' ,  '~' ,  '~' ,  '~' ,  '~' ,  '~' ,  '~' ,  '~' };
+	cout << endl;
+	print_in_color("> Enter the ISBN of the book (10 Characters): ", "def", "yellow");
+	cin >> vISBN;
+	cout << endl;
+	print_in_color("> Enter the NAME of the book (18 Characters): ", "def", "yellow");
+	cin >> vname;
+
+	
+	ifstream inbook("./text_folder/books.txt");
+	while (inbook.good())
+	{
+		book temp(inbook);
+		bool same = true;
+		for (int i = 0; i < 10 && vISBN[i] != 'z' && vISBN[i] != '\0'; ++i)
+		{
+			if (temp.get_ISBN()[i] != vISBN[i])
+			{
+				same = false;
+			}
+		}
+		for (int i = 0; i < 10 && vname[i] != '~' && vname[i] != '\0'; ++i)
+		{
+			if (temp.get_name()[i] != vname[i])
+			{
+				same = false;
+			}
+		}
+		if (same)
+		{
+			vbook = temp;
+		}
+	}
+	inbook.close();
+	if (vbook.get_author() == "NOTFOUND")
+	{
+		cout << endl;
+		print_line_in_color(console_columns_count(), "red");
+		cout << endl;
+		print_in_color("BOOK NOT FOUND!", "def", "red");
+		cout << endl;
+
+		char ans;
+		print_in_color("Try again? (y/n)", "def", "yellow");
+		cin >> ans;
+		if (ans == 'y' || ans == 'Y')
+			tryagain = true;
+		else
+			tryagain = false;
+		}
+	}
+
+
+	assign_book_to_library(vbook, vlib);
+	cout << endl;
+	print_vasat("OPERATION SUCCESSFUL!", "def", "green", console_columns_count());
+	cout << endl;
+	leaving_in(6, "def", "yellow");
 }
 
 void create_a_book()
@@ -113,15 +223,6 @@ void loan_return_a_book()
 	print_vasat("LOAN/RETURN A BOOK!", "yellow", "red", console_columns_count());
 	cout << endl << endl << endl;
 
-
-	print_in_color("> Enter a valid library ADDRESS (existing/10chars/no whitespace): ", "def", "yellow");
-	char vaddress[10];
-	cin >> vaddress;
-
-	print_in_color("> Enter a valid book ISBN (existing/10chars/no whitespace): ", "def", "yellow");
-	char vISBN[10];
-	cin >> vISBN;
-
 	/*TODO ali: 
 		1) 2ta ifstream ba address haayi ke tooye
 			create_a_library va create_a_book hastand
@@ -140,8 +241,101 @@ void loan_return_a_book()
 
 
 
+	//INITS
+	library  vlib;
+	vlib.set_name = "NOTFOUND";
+
+	book vbook;
+	vbook.set_author("NOTFOUND");
+
+	//TODO ali: use assign_book_to_library() ...
+
+	
+	char vaddress[10];
+	print_in_color("> Enter the ADDRESS of the library (10 Characters): ", "def", "yellow");
+	cin >> vaddress;
+
+	ifstream inlib("./text_folder/libraries.txt");
+
+	while (inlib.good())
+	{
+		library temp(inlib);
+		bool same = true;
+		for (int i = 0; i < 10; ++i)
+		{
+			if (temp.get_address()[i] != vaddress[i])
+			{
+				same = false;
+			}
+		}
+		if (same)
+		{
+			vlib = temp;
+		}
+	}
+	inlib.close();
+	if (vlib.get_name() == "NOTFOUND")
+	{
+		cout << endl;
+		print_line_in_color(console_columns_count(), "red");
+		cout << endl;
+		print_in_color("LIBRARY NOT FOUND!", "def", "red");
+		cout << endl;
+		leaving_in(4, "def", "red");
+		return; //FUNCTION ENDS HERE
+	}
+
+	bool tryagain = true;
+	while (tryagain)
+	{
+		cout << endl;
+		char vISBN[11] = { 'z', 'z', 'z', 'z', 'z', 'z', 'z', 'z', 'z', 'z', 'z' };
+		cout << endl;
+		print_in_color("> Enter the ISBN of the book (10 Characters): ", "def", "yellow");
+		cin >> vISBN;
+
+
+		ifstream inbook("./text_folder/books.txt");
+		while (inbook.good())
+		{
+			book temp(inbook);
+			bool same = true;
+			for (int i = 0; i < 10 && vISBN[i] != 'z' && vISBN[i] != '\0'; ++i)
+			{
+				if (temp.get_ISBN()[i] != vISBN[i])
+				{
+					same = false;
+				}
+			}
+			if (same)
+			{
+				vbook = temp;
+			}
+		}
+		inbook.close();
+		if (vbook.get_author() == "NOTFOUND")
+		{
+			cout << endl;
+			print_line_in_color(console_columns_count(), "red");
+			cout << endl;
+			print_in_color("BOOK NOT FOUND!", "def", "red");
+			cout << endl;
+			char ans;
+			print_in_color("Try again? (y/n)", "def", "yellow");
+			cin >> ans;
+			if (ans == 'y' || ans == 'Y')
+				tryagain = true;
+			else
+				tryagain = false;
+		}
+
+		}
+
+	vbook.set_loaned(!vbook.get_loaned());
+	assign_book_to_library(vbook, vlib);
 	cout << endl;
-	//***In function, khodesh endl nemikone havaset bashe ( ali: )
+	print_vasat("OPERATION SUCCESSFUL!", "def", "green", console_columns_count());
+	cout << endl;
 	leaving_in(6, "def", "yellow");
 }
 

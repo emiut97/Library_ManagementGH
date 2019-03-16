@@ -41,5 +41,11 @@
     <ClCompile Include="functions.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
+    <ClCompile Include="console_functions_LEGACY.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="design_LEGACY.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
