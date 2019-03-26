@@ -71,7 +71,7 @@ int main()
 			loan_return_a_book();
 		}
 
-		if (option == 5) //TODO
+		if (option == 5) //Done //DebugMarch26th
 		{
 			//List by a specific genre
 			cls();

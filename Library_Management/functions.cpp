@@ -433,7 +433,7 @@ void list_by_a_specific_genre() //TODO ali:
 	print_in_color("> : ", "def", "yellow");
 	cin >> s;
 	book compare;
-	while (compare.set_genre(s))
+	while (!compare.set_genre(s)) //DebugMarch26th: added a '!' sign.
 	{
 		cout << endl;
 		print_line_in_color(console_columns_count(), "red");
@@ -448,6 +448,8 @@ void list_by_a_specific_genre() //TODO ali:
 		cin >> s;
 	}
 
+
+	///Getting all the books of the library from text file
 	string fadd = "./text_folder2/booklistof_" + vlib.get_name() + "_" + vlib.get_address() + ".txt";
 	ifstream curr_list(fadd);
 	bookchain* booklistof_first = nullptr;
@@ -473,9 +475,9 @@ void list_by_a_specific_genre() //TODO ali:
 	{
 		cout << endl;
 		print_in_color("NO BOOKS IN THE LIBRARY!", "def", "red");
-		return;
+		return; //FUNCTION ENDS HERE
 	}
-
+	//possible bug
 	bookchain* cleanbooklistof_first = nullptr;
 	bookchain* cleanbooklistof_last = nullptr;
 	int total_clean = 1;
@@ -529,13 +531,38 @@ void list_by_a_specific_genre() //TODO ali:
 		while (inbooks.good())
 		{
 			book temp2(inbooks);
+			//temp2 <> curr_book
+			//if (is same and) !deleted and genre is what we need--> add
+			
+			/* ///***Code revisioned
 			if (temp2.get_genre() == curr_book.get_genre())
 			{
 				addtochain(curr_book, bookswithspecificgenre_first, bookswithspecificgenre_last);
 				total_specific++;
 			}
+			*/
+
+			bool samesame = true;
+			for (int j = 0; j < 10; ++j)
+			{
+				if (temp2.get_ISBN()[j] != curr_book.get_ISBN()[j])
+					samesame = false;
+			}
+			if (samesame && temp2.get_deleted()==false && temp2.get_genre()==compare.get_genre())
+			{
+				keepit = true;
+			}
+			else
+			{
+				keepit = false;
+			}
 		}
 		inbooks.close();
+		if(keepit)
+		{
+			addtochain(curr_book, bookswithspecificgenre_first, bookswithspecificgenre_last);
+			total_specific++;
+		}
 	}
 
 
@@ -543,10 +570,11 @@ void list_by_a_specific_genre() //TODO ali:
 	for (int i = 0; i < total_specific - 1; i++)
 
 		// Last i elements are already in place    
-		for (int j = 0; j < total_specific - i - 1; j++) //TODO erfan
-			if (nth_bookchain(j + 1, bookswithspecificgenre_first, bookswithspecificgenre_last)->data.get_genre_int()
-		>
-				nth_bookchain(j + 1 + 1, bookswithspecificgenre_first, bookswithspecificgenre_last)->data.get_genre_int())
+		for (int j = 0; j < total_specific - i - 1; j++) //TODODONE erfan: strcmp baraye moghaayeseye author haa na genre haa //possible bug: '>' for string??
+			if (nth_bookchain(j + 1, bookswithspecificgenre_first, bookswithspecificgenre_last)->data.get_author()
+				>
+				nth_bookchain(j + 1 + 1, bookswithspecificgenre_first, bookswithspecificgenre_last)->data.get_author()
+				)
 			{
 				//swap(&arr[j], &arr[j + 1]);
 
@@ -587,7 +615,29 @@ void list_by_a_specific_genre() //TODO ali:
 
 			}
 
+	//Printing the final result (bookswithspecificgenre)
+	cout << endl << endl;
+	for (int i = 0; i < total_specific - 1; i++)
+	{
+		book temp3 = nth_bookchain(i + 1, bookswithspecificgenre_first, bookswithspecificgenre_last)->data;
+		
+		print_in_color("Name: ", "def", "yellow");
+		print_in_color(temp3.get_name(), "def", "aqua");
+		cout << "\t";
 
+		print_in_color("ISBN: ", "def", "yellow");
+		for (int j = 0; j < 10; ++j)
+		{
+			char curr_char = temp3.get_ISBN()[j];
+		print_in_color(to_string(curr_char), "def", "aqua");
+		}
+		cout << "\t";
+
+		print_in_color("Author: ", "def", "yellow");
+		print_in_color(temp3.get_author(), "def", "aqua");
+		cout << "\t";
+		cout << endl;
+	}
 }
 
 void delete_a_library()
@@ -646,6 +696,7 @@ void delete_a_library()
 
 void print_library_info()
 {
+
 }
 
 void delete_a_book()
